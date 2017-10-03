@@ -1,28 +1,29 @@
 package Algodat3D;
+
 /**
  *
  * @author Rofiif
  */
 public class ArrayLinearList implements LinearList {
 
-    protected Object [] element, element2;
+    protected Object[] element, element2;
     protected int size;
 
     //edit constructor untuk no 4 hal 172
-    public ArrayLinearList (int initialCapacity){
-        if(initialCapacity < 1){
+    public ArrayLinearList(int initialCapacity) {
+        if (initialCapacity < 1) {
             System.out.println("Salah !");
             throw new IllegalArgumentException("panjang array harus lebih dari 1");
         }
-        
+
         element = new Object[initialCapacity];
-        
-        if(initialCapacity == element.length){
-        element = ChangeArrayLength.changeLength1D(element, 2*initialCapacity);
+
+        if (initialCapacity == element.length) {
+            element = ChangeArrayLength.changeLength1D(element, 2 * initialCapacity);
         }
     }
 
-    public ArrayLinearList(){
+    public ArrayLinearList() {
         this(10);
     }
 
@@ -30,15 +31,16 @@ public class ArrayLinearList implements LinearList {
     public boolean isEmpty() {
         return size == 0;
     }
- 
+
     @Override
     public int size() {
         return size;
     }
 
-    void checkIndex(int index){
-        if (index < 0 || index >= size)
+    public void checkIndex(int index) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("index = " + index + " size = " + size);
+        }
     }
 
     @Override
@@ -49,9 +51,10 @@ public class ArrayLinearList implements LinearList {
 
     @Override
     public int indexOf(Object theElement) {
-        for (int i = 0; i < size; i++){
-            if(element[i].equals(theElement))
+        for (int i = 0; i < size; i++) {
+            if (element[i].equals(theElement)) {
                 return i;
+            }
         }
         return -1;
     }
@@ -60,100 +63,117 @@ public class ArrayLinearList implements LinearList {
     public Object remove(int index) {
         checkIndex(index);
         Object removedElement = element[index];
-        for(int i = index + 1; i < size; i++){
-            element[i-1] = element[i];
+        for (int i = index + 1; i < size; i++) {
+            element[i - 1] = element[i];
         }
-        element[--size] = null;  
+        element[--size] = null;
         return removedElement;
 
     }
-    
+
     @Override
     public void add(int index, Object theElement) {
-        if (index < 0 || index > size){
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("index = " + index + "size = " + size);
         }
 
-        if (size == element.length){
-            ArrayLinearList ar =  new ArrayLinearList(size);
+        if (size == element.length) {
+            ArrayLinearList ar = new ArrayLinearList(size);
         }
 
-        if(element.length > size){
-        for (int i = size - 1; i>= index; i--){
-            element[i+1]= element[i];
+        if (element.length > size) {
+            for (int i = size - 1; i >= index; i--) {
+                element[i + 1] = element[i];
+            }
+
+            element[index] = theElement;
+
+            size++;
         }
-        
-        element[index] = theElement;
-        
-        size++;}
     }
-    
-    @Override
-    public String toString(){
-        
-        StringBuffer s = new StringBuffer("[");
-        
 
-        for (int i = 0; i < size; i++){
-            if (element[i] == null)
+    @Override
+    public String toString() {
+
+        StringBuffer s = new StringBuffer("[");
+
+        for (int i = 0; i < size; i++) {
+            if (element[i] == null) {
                 s.append("null, ");
-            else 
+            } else {
                 s.append(element[i].toString() + ", ");
+            }
         }
-        if (size > 0){
+        if (size > 0) {
             s.delete(s.length() - 2, s.length());
         }
         s.append("]");
 
         return new String(s);
-                    
+
     }
-    
+
     //Code program no 5
-    
     @Override
-    public void trimToSize(){
+    public void trimToSize() {
         element2 = new Object[size];
         if (size < element.length) {
-           System.arraycopy(element, 0, element2, 0, size);
-                 
-           element = element2;
+            System.arraycopy(element, 0, element2, 0, size);
+
+            element = element2;
         }
-       
+
     }
-    
+
     //Code program nomor 6
-    
     @Override
-    public Object setSize(int no){
-        if(size>no){
+    public Object setSize(int no) {
+        if (size > no) {
             int index = size - no;
             Object removedElement = element[no];
-            for(int i=0; i<index;i++){
-                for(int j = index + 1; j < size; j++)
-                element[j-1] = element[j];
+            for (int i = 0; i < index; i++) {
+                for (int j = index + 1; j < size; j++) {
+                    element[j - 1] = element[j];
+                }
 
-            element[--size] = null;
+                element[--size] = null;
             }
             return removedElement;
-        }
-        else{
+        } else {
             element2 = new Object[no];
             System.arraycopy(element, 0, element2, 0, size);
-                        
+
             element = element2;
-            
+
         }
         return size;
     }
-    
+
     //Code program soal no 8
-    
     @Override
-    public Object clear(){
-        for(int i = 0; i<size; i++){
+    public Object clear() {
+        for (int i = 0; i < size; i++) {
             element[i] = null;
         }
         return element;
     }
+          
+    @Override
+    public void removeRange(int fromindex, int toIndex) {
+      
+        int numMoved = size - toIndex;
+        System.arraycopy(element, toIndex, element, fromindex, numMoved);
+        int newSize= size - (toIndex-fromindex);
+        while(size != newSize)
+            element[--size] = null;
+    }
+    
+    @Override
+    public Object clone(Object a) {
+         a= new Object[size];
+        a= element.clone();
+        return toString();
+    }
+    
+    
 }

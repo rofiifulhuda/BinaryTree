@@ -15,4 +15,7 @@ public interface LinearList {
     public void trimToSize();
     public Object setSize(int no);
     public Object clear();
+    public void removeRange(int fromindex, int toIndex);
+    public Object clone(Object theElement);
+    
 }
