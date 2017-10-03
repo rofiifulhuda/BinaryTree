@@ -27,8 +27,9 @@ public class Driver {
             System.out.println("Isi dari index      : " + a.get(1));
             System.out.println("Index Of            : " + a.indexOf("B"));
             System.out.println("\t\t\t\t*Soal nomor 12*");
-            a.clone(a);
-            System.out.println("Setelah di clone    : "+a.toString());
+            
+            Object[] x= new Object[20];
+            System.out.println("Setelah di clone    : "+a.clone(x));
 
             System.out.println("\t\t\t\t*Soal nomor 3*");
 

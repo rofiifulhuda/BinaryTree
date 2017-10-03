@@ -159,6 +159,7 @@ public class ArrayLinearList implements LinearList {
     }
           
     @Override
+    //Code program Soal no 9
     public void removeRange(int fromindex, int toIndex) {
       
         int numMoved = size - toIndex;
@@ -169,7 +170,8 @@ public class ArrayLinearList implements LinearList {
     }
     
     @Override
-    public Object clone(Object a) {
+    //Code program Soal no 12
+    public Object clone(Object[] a) {
          a= new Object[size];
         a= element.clone();
         return toString();
