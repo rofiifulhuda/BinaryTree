@@ -11,9 +11,9 @@ package BinaryTree;
  */
 public class BinaryTreeNode {
     
-    Object element;
-    BinaryTreeNode leftChild; // left subtree  
-    BinaryTreeNode rightChild; // right subtree
+   public Object element;
+   public BinaryTreeNode leftChild; // left subtree  
+   public  BinaryTreeNode rightChild; // right subtree
     
     public static void visit(BinaryTreeNode t){
         System.out.print(t.element+" ");

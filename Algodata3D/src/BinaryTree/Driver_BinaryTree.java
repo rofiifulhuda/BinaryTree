@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author Rofiif
  */
-public class DriverMain {
+public class Driver_BinaryTree {
      public static void main(String[] args)
     {            
         Scanner scan = new Scanner(System.in);
